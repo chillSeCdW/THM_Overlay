@@ -1,0 +1,37 @@
+.THMOverlay {
+    top: 100px;
+    position: absolute; 
+    background-color: rgba(221, 221, 221, 0.3);
+    z-index: 1;
+    text-align: center;
+    padding: 5px 0;
+    visibility: hidden;
+}
+
+.THMtop {
+    color: #FF00FF;
+    font-size: 20px;
+    margin-top: 125px;
+}
+
+.THMbottom {
+    color: #FF00FF;
+    font-size: 20px;
+    margin-top: 400px;
+}
+
+.THMleft {
+    color: #FF00FF; 
+    font-size: 20px;
+    margin-top: 255px;
+}
+
+.THMright {
+    color: #FF00FF; 
+    font-size: 20px;
+    margin-top: 255px;
+}
+
+div.THMOverlay a {
+    color: #00FFFF;
+}
