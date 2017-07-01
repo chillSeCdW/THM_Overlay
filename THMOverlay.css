@@ -4,32 +4,38 @@
     background-color: rgba(221, 221, 221, 0.3);
     z-index: 1;
     text-align: center;
-    padding: 5px 0;
+    padding: 5px 5px;
     visibility: hidden;
 }
 
 .THMtop {
     color: #FF00FF;
     font-size: 20px;
-    margin-top: 125px;
+    position: relative;
+    top: -800px;
 }
 
 .THMbottom {
     color: #FF00FF;
     font-size: 20px;
-    margin-top: 400px;
+    position: relative;
+    top: -150px;
 }
 
 .THMleft {
     color: #FF00FF; 
     font-size: 20px;
-    margin-top: 255px;
+    position: relative;
+    top: -450px;
+    float: left;
 }
 
 .THMright {
     color: #FF00FF; 
     font-size: 20px;
-    margin-top: 255px;
+    position: relative;
+    top: -450px;
+    float: right;
 }
 
 div.THMOverlay a {

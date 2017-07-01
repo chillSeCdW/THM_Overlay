@@ -20,7 +20,7 @@ if (!class_exists('THM_VIDEO_OVERLAY')) {
         }
 
         /**
-         * sets up all wordpress actions and shortcode handleing
+         * sets up all wordpress actions and shortcode handling
          */
         function plugin_includes() {
             if (is_admin()) {
@@ -122,9 +122,9 @@ function THM_Overlay_Video_Handler($atts) {
                         if('$position'.includes('top') || '$position'.includes('bottom')) {
                             OverlayDiv.style.width = matches[0].offsetWidth+'px';
                         } else {
-                            OverlayDiv.style.width = (matches[0].offsetWidth)/4+'px';
+                            //OverlayDiv.style.width = ($contentString)+'px';
                             if('$position'.includes('right')) {
-                                OverlayDiv.style.marginLeft = (matches[0].offsetWidth)-(OverlayDiv.style.width.split('p')[0])+'px';
+                                //OverlayDiv.style.marginLeft = (matches[0].offsetWidth)-(OverlayDiv.style.width.split('p')[0])+'px';
                             }
                         }
                         matches[0].appendChild(OverlayDiv);
