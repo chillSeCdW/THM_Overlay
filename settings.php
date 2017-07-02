@@ -23,6 +23,9 @@
                         <p><code>pic="www.example.com/pic.png"</code> Link to Picture</p>
                         <p><code>pWidth="50"</code> Sets Width of Picture in pixel</p>
                         <p><code>pHeight="50"</code> Sets Height of Picture in pixel</p>
+                        <p><code>video="www.example.com/clip.mp4"</code> Link to Videoclip</p>
+                        <p><code>vWidth="50"</code> Sets Width of Videoclip in pixel</p>
+                        <p><code>vHeight="50"</code> Sets Height of Videoclip in pixel</p>
                     </div>
                     <!-- .inside -->
                 </div>

@@ -74,7 +74,7 @@ function THM_Overlay_Video_Handler($atts) {
 	$output;
     $string;
     $PicScript = '';
-    $picflag = 0;
+    $VidScript = '';
 	
     $atts = shortcode_atts(
 			array(
@@ -83,24 +83,23 @@ function THM_Overlay_Video_Handler($atts) {
                 'pic'       =>  '',
                 'pWidth'    =>  '50',
                 'pHeight'   =>  '50',
+                'video'       =>  '',
+                'vWidth'    =>  '50',
+                'vHeight'   =>  '50',
 				'position'  =>  'top',
                 'start' =>  '0',
                 'end' =>  '5'
 			), $atts, 'THMOverlay' );
 
     //check if there is any content
-    if(empty($atts['content']) && empty($atts['pic'])){
-		return __("[THMOverlay-Error] Content or Picture has to be set!", '--');
+    if(empty($atts['content']) && empty($atts['pic']) && empty($atts['video'])){
+		return __("[THMOverlay-Error] Content, Video or Picture has to be set!", '--');
 	}
 
 
     $timeStart  = $atts['start'];
     $timeEnd    = $atts['end'];
     $position   = 'THM' . $atts['position'];
-
-    if(!empty($atts['pic'])) {
-        $PicScript = buildPictureSizeScript($atts['pWidth'], $atts['pHeight']);
-    }
 
     $contentString = THM_Overlay_Content_Handler($atts);
 	
@@ -133,7 +132,13 @@ function THM_Overlay_Video_Handler($atts) {
 
                         //check if Picture is there, if yes add script
                         if(!empty($PicScript)) {
+                            $PicScript = buildPictureSizeScript($atts['pWidth'], $atts['pHeight']);
                             $output .= $PicScript;
+                        }
+                        //check if Video is there, if yes add script
+                        if(!empty($VidScript)) {
+                            $VidScript = buildVideoSizeScript($atts['vWidth'], $atts['vHeight']);
+                            $output .= $VidScript;
                         }
 
 	$output .=  "});
@@ -163,6 +168,23 @@ function buildPictureSizeScript($width, $height) {
 }
 
 /**
+ * gets javascript for resizing video
+ *
+ * @param number $width desired width of video
+ * @param number $height desired height of video
+ */
+function buildVideoSizeScript($width, $height) {
+
+    $script = "
+        var video = document.getElementById('OverlayVid')
+        video.style.width = $width + 'px';
+        video.style.height = $height + 'px';
+    ";
+
+    return $script;
+}
+
+/**
  * Builds the Content String with specified attributes
  * which will be in the Overlay <div>
  * 
@@ -173,6 +195,11 @@ function THM_Overlay_Content_Handler($atts) {
     if(!empty($atts['pic'])){
         $content .= "<div>";
         $content .= '<img id="OverlayPic" src="'. $atts['pic'] . '">';
+        $content .= "</div>";
+	}
+    if(!empty($atts['video'])){
+        $content .= "<div>";
+        $content .= '<video id="OverlayVid" src="'. $atts['video'] . '" autoplay muted>';
         $content .= "</div>";
 	}
     if(!empty($atts['link'])){
