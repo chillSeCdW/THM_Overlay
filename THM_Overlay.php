@@ -63,6 +63,8 @@ function THMOverlay_get_scripts() {
     }
 }
 
+$n; //counter for multiple overlays
+
 /**
  * proccesses user shortCode into Overlay Div
  * and adds it to first player on the page
@@ -75,6 +77,8 @@ function THM_Overlay_Video_Handler($atts) {
     $string;
     $PicScript = '';
     $VidScript = '';
+    global $n;
+    $n = $n+1;
 	
     $atts = shortcode_atts(
 			array(
@@ -113,7 +117,7 @@ function THM_Overlay_Video_Handler($atts) {
                         );
                         //creating Overlay Div Container
                         var OverlayDiv = document.createElement('div');
-                        OverlayDiv.id = 'THMOverlay-' + matches[0].getAttribute('id').split('-')[1];
+                        OverlayDiv.id = 'THMOverlay-' + matches[0].getAttribute('id').split('-')[1] + '$n';
                         OverlayDiv.className = 'THMOverlay ' + '$position';
                         OverlayDiv.innerHTML = '$contentString';
 
