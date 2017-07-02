@@ -91,6 +91,7 @@ function THM_Overlay_Video_Handler($atts) {
                 'vWidth'    =>  '50',
                 'vHeight'   =>  '50',
 				'position'  =>  'top',
+                'ticker'    =>  'false',
                 'start' =>  '0',
                 'end' =>  '5'
 			), $atts, 'THMOverlay' );
@@ -210,9 +211,11 @@ function THM_Overlay_Content_Handler($atts) {
         $content .= "</div>";
     } if(!empty($atts['content'])) {
         $content .= "<div>";
+        if(strcmp($atts['ticker'],"true") == 0) $content .= "<marquee>";
         if(!empty($atts['link'])) $content .= '<a target="_blank" href="' . $atts['link'] . '">'; 
         $content .= $atts['content'];
         if(!empty($atts['link'])) $content .= '</a>';
+        if(strcmp($atts['ticker'],"true") == 0) $content .= "</marquee>";
         $content .= "</div>";
     }
     return $content;
