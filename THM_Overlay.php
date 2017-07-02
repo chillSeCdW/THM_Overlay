@@ -192,6 +192,7 @@ function buildVideoSizeScript($width, $height) {
  */
 function THM_Overlay_Content_Handler($atts) {
 
+    if(!empty($atts['link'])) $content .= '<a target="_blank" href="' . $atts['link'] . '">'; 
     if(!empty($atts['pic'])){
         $content .= "<div>";
         $content .= '<img id="OverlayPic" src="'. $atts['pic'] . '">';
@@ -199,18 +200,15 @@ function THM_Overlay_Content_Handler($atts) {
 	}
     if(!empty($atts['video'])){
         $content .= "<div>";
+        if(!empty($atts['link'])) $content .= '<a target="_blank" href="' . $atts['link'] . '">';
         $content .= '<video id="OverlayVid" src="'. $atts['video'] . '" autoplay muted>';
+        if(!empty($atts['link'])) $content .= '</a>';
         $content .= "</div>";
-	}
-    if(!empty($atts['link'])){
-        $content .= "<div>";
-        $content .= '<a target="_blank" href="' . $atts['link'] . '">' . $atts['content'] . '</a>';
-        $content .= "</div>";
-    } else if(!empty($atts['content'])) {
+    } if(!empty($atts['content'])) {
         $content .= "<div>";
         $content .= $atts['content'];
         $content .= "</div>";
     }
-
+    if(!empty($atts['link'])) $content .= '</a>';
     return $content;
 }
