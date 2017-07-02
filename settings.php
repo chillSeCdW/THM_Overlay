@@ -17,7 +17,8 @@
                     <h3><span>More Parameters</span></h3>
                     <div class="inside">
                         <p><code>position="top"</code> usable words (default is top): <b>left, top, right, bottom</b></p>
-                        <p><code>link="http://www.google.com"</code> to set Link for content</p>
+                        <p><code>ticker="true"</code> Show content as ticker</p>
+                        <p><code>link="http://www.google.com"</code> to set Link</p>
                         <p><code>start="0"</code> Set Time of video to start displaying Overlay (default is 0)</p>
                         <p><code>end="5"</code> Set Time of video to stop displaying Overlay (default is 5)</p>
                         <p><code>pic="www.example.com/pic.png"</code> Link to Picture</p>
