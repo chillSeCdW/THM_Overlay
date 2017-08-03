@@ -139,7 +139,6 @@ function THM_Overlay_Video_Handler($atts) {
 
                         new ResizeSensor(matches[0], function() {
                             var layer = document.getElementById(OverlayDiv.id);
-                            console.log('Changed to ' + matches[0].clientWidth);
                             if(layer.className.includes('THMtop') || layer.className.includes('THMbottom')) {
                                 layer.style.width = matches[0].clientWidth + 'px';
                             } else {
