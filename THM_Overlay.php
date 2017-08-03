@@ -58,6 +58,8 @@ function THMOverlay_get_scripts() {
         $plugin_url = plugins_url('', __FILE__);
         wp_register_script('THMOverlay-main', $plugin_url . '/THMOverlay-main.js', array(), THM_VIDEO_OVERLAY_VERSION, 'all');
         wp_enqueue_script('THMOverlay-main');
+        wp_register_script('THMOverlay-ResizeSensor', $plugin_url . '/ResizeSensor.js', array(), THM_VIDEO_OVERLAY_VERSION, 'all');
+        wp_enqueue_script('THMOverlay-ResizeSensor');
         wp_register_style('THMOverlay-style', $plugin_url . '/THMOverlay.css', array(), THM_VIDEO_OVERLAY_VERSION, 'all');
         wp_enqueue_style('THMOverlay-style');
     }
@@ -85,11 +87,11 @@ function THM_Overlay_Video_Handler($atts) {
                 'content'   =>  '',
                 'link'      =>  '',
                 'pic'       =>  '',
-                'pWidth'    =>  '50',
-                'pHeight'   =>  '50',
+                'pWidth'    =>  '100%',
+                'pHeight'   =>  '100%',
                 'video'       =>  '',
-                'vWidth'    =>  '50',
-                'vHeight'   =>  '50',
+                'vWidth'    =>  '100%',
+                'vHeight'   =>  '100%',
 				'position'  =>  'top',
                 'ticker'    =>  'false',
                 'start' =>  '0',
@@ -126,25 +128,31 @@ function THM_Overlay_Video_Handler($atts) {
                         if('$position'.includes('top') || '$position'.includes('bottom')) {
                             OverlayDiv.style.width = matches[0].offsetWidth+'px';
                         } else {
-                            //OverlayDiv.style.width = ($contentString)+'px';
+                            OverlayDiv.style.width = (matches[0].offsetWidth/4)+'px';
                             if('$position'.includes('right')) {
                                 //OverlayDiv.style.marginLeft = (matches[0].offsetWidth)-(OverlayDiv.style.width.split('p')[0])+'px';
                             }
                         }
                         matches[0].appendChild(OverlayDiv);
                         // function for Visibility of Overlay
-                        player.listenTo(player, Clappr.Events.PLAYER_TIMEUPDATE, function() { checkAndToggleOverlay(OverlayDiv.id, $timeStart, $timeEnd) })";
+                        player.listenTo(player, Clappr.Events.PLAYER_TIMEUPDATE, function() { checkAndToggleOverlay(OverlayDiv.id, $timeStart, $timeEnd) })
 
-                        //check if Picture is there, if yes add script
-                        if(!empty($PicScript)) {
-                            $PicScript = buildPictureSizeScript($atts['pWidth'], $atts['pHeight']);
-                            $output .= $PicScript;
-                        }
-                        //check if Video is there, if yes add script
-                        if(!empty($VidScript)) {
-                            $VidScript = buildVideoSizeScript($atts['vWidth'], $atts['vHeight']);
-                            $output .= $VidScript;
-                        }
+                        new ResizeSensor(matches[0], function() {
+                            var layer = document.getElementById(OverlayDiv.id);
+                            console.log('Changed to ' + matches[0].clientWidth);
+                            if(layer.className.includes('THMtop') || layer.className.includes('THMbottom')) {
+                                layer.style.width = matches[0].clientWidth + 'px';
+                            } else {
+                                layer.style.width = matches[0].clientWidth/4 + 'px';
+                            }
+                        });";
+
+                        //add Picture script
+                        $PicScript = buildPictureSizeScript($atts['pWidth'], $atts['pHeight']);
+                        $output .= $PicScript;
+                        //add Video script
+                        $VidScript = buildVideoSizeScript($atts['vWidth'], $atts['vHeight']);
+                        $output .= $VidScript;
 
 	$output .=  "});
 			</script>";
@@ -165,8 +173,10 @@ function buildPictureSizeScript($width, $height) {
 
     $script = "
         var picture = document.getElementById('OverlayPic')
-        picture.style.width = $width + 'px';
-        picture.style.height = $height + 'px';
+        if(picture) {
+            picture.style.width = '$width';
+            picture.style.height = '$height';
+        }
     ";
 
     return $script;
@@ -182,8 +192,10 @@ function buildVideoSizeScript($width, $height) {
 
     $script = "
         var video = document.getElementById('OverlayVid')
-        video.style.width = $width + 'px';
-        video.style.height = $height + 'px';
+        if(video) {
+            video.style.width = '$width';
+            video.style.height = '$height';
+        }
     ";
 
     return $script;

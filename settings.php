@@ -22,11 +22,11 @@
                         <p><code>start="0"</code> Set Time of video to start displaying Overlay (default is 0)</p>
                         <p><code>end="5"</code> Set Time of video to stop displaying Overlay (default is 5)</p>
                         <p><code>pic="www.example.com/pic.png"</code> Link to Picture</p>
-                        <p><code>pWidth="50"</code> Sets Width of Picture in pixel</p>
-                        <p><code>pHeight="50"</code> Sets Height of Picture in pixel</p>
+                        <p><code>pWidth="50px"</code><code>pWidth="50%"</code> Sets Width of Picture(default is 100%)</p>
+                        <p><code>pHeight="50px"</code><code>pHeight="50%"</code> Sets Height of Picture(default is 100%)</p>
                         <p><code>video="www.example.com/clip.mp4"</code> Link to Videoclip</p>
-                        <p><code>vWidth="50"</code> Sets Width of Videoclip in pixel</p>
-                        <p><code>vHeight="50"</code> Sets Height of Videoclip in pixel</p>
+                        <p><code>vWidth="50px"</code><code>vWidth="50%"</code> Sets Width of Videoclip(default is 100%)</p>
+                        <p><code>vHeight="50px"</code><code>vHeight="50%"</code> Sets Height of Videoclip(default is 100%)</p>
                     </div>
                     <!-- .inside -->
                 </div>
